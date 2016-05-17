@@ -1,8 +1,5 @@
 `<!DOCTYPE html>
 <html class="full" lang="en">
-<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
-mixpanel.init("5522544fc38bf5b316d20103a38de336");</script><!-- end Mixpanel -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +9,8 @@ mixpanel.init("5522544fc38bf5b316d20103a38de336");</script><!-- end Mixpanel -->
 
     <title>WedDresser</title>
    
-    <link rel="shortcut icon" href="../img/favicon.png" />
+    <link rel="shortcut icon" type="image/icon" href="/favicon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="http://www.weddresser.com/favicon.ico"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href="css/full.css" rel="stylesheet">
@@ -20,24 +18,26 @@ mixpanel.init("5522544fc38bf5b316d20103a38de336");</script><!-- end Mixpanel -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    
-
-</head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <img src="img/weddresser.png" style="height="35%", width="35%" ">
-                <p class="caps"><strong>RENT - SELL - BUY WEDDING GOWN </strong></p>
-                <span><p>Have you ever walked down the aisle? Do you have a wedding gown? Let us help you make some money off it.</p></span>
-                <p>Enter your email address or whatsapp number. We will reach you in 24 hours.</p><br>
+                <p class="caps"><strong>RENT - SELL - BUY </strong></p>
+                <span><p>What happened to your wedding gown after your day?</p></span>
+                <p> Lets help you sell or rent it out.Enter your email or whatsapp number.We will notify you soon.</p><br>
+                <form class="Subscribe" id="newUser">
                 <input class="textbox"type="text" id="contact" placeholder=" Enter WhatsApp Number or Email"> 
-                <button type="button">Submit</button><br><br>
+                <button type="submit" class="submitBtn">Submit</button><br><br>
+                </form>
+                <div class="message"></div>
                 Follow us on Social Media
-                <a href="https://twitter.com/weddresser" class="icon" ><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-                <a href="" class="icon"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
-                <a href="" class="icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/weddresser" target="_blank" class="icon" ><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.facebook.com/weddresser" target="_blank" class="icon"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/weddresser/" target="_blank" class="icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
 
             </div>
         </div>
@@ -52,6 +52,18 @@ mixpanel.init("5522544fc38bf5b316d20103a38de336");</script><!-- end Mixpanel -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script>
+    $('#newUser').submit(function(e){
+      e.preventDefault();
+     
+      var myFirebaseRef = new Firebase("https://scorching-heat-3850.firebaseio.com/");
+      var newContact = $('#contact').val().trim(); 
+       myFirebaseRef.push({email: newContact });
+       $(".message").addClass("success");
+       $(".message").html('Thanks for signing up. We will contact you within 24 hours.');
+        $('#contact').val('');
+    });
+    </script>
    
 </body>
 
